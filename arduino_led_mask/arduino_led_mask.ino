@@ -5,7 +5,7 @@
 #define NUM_ROWS 7
 #define NUM_FIRST_ROW 26
 #define LED_TYPE WS2812B
-#define COLOR_ORDER RGB
+#define COLOR_ORDER GRB
 #define BRIGHTNESS 90
 
 CRGB leds[NUM_LEDS];
@@ -25,57 +25,68 @@ void setup()
 // Examples of designs you can loop through
 void loop()
 {
-  // fadePink();
-  fadePinkBlue();
-
-  FastLED.setMaxPowerInVoltsAndMilliamps(3, 500);
-  FastLED.delay(200);
+  // fadePinkBlue();
+  // fillColor(0, 0, 200);
+  fadeToColor(0, 0, 10, 20, 0, 100, 150, 1);
+  fadeToColor(20, 0, 100, 0, 0, 10, 150, 1);
+  // FastLED.setMaxPowerInVoltsAndMilliamps(3, 500);
+  // FastLED.delay(200);
 }
 
-void fadePinkBlue()
+void fillColor(int r, int g, int b)
 {
-  for (float z = 1; z > 0; z -= 0.0025)
+  for (int i = 0; i < NUM_LEDS; i++)
   {
-    for (int i = 0; i < NUM_LEDS; i++)
-    {
-      leds[i] = CRGB(5 * z, 200 * (z / 2), 160);
-    }
+    leds[i] = CRGB(g, r, b);
+  }
+}
+
+void fadeToColor(float r1, float g1, float b1, float r2, float g2, float b2, float steps, int speed)
+{
+  float deltaR = (r2 - r1) / steps;
+  float deltaG = (g2 - g1) / steps;
+  float deltaB = (b2 - b1) / steps;
+  float curR = r1;
+  float curG = g1;
+  float curB = b1;
+
+  float curDeltaR = 0;
+  float curDeltaG = 0;
+  float curDeltaB = 0;
+  for (int i = 0; i < steps; i++)
+  {
+    curDeltaR += deltaR;
+    curDeltaG += deltaG;
+    curDeltaB += deltaB;
+    fillColor(
+        curR + curDeltaR,
+        curG + curDeltaG,
+        curB + curDeltaB);
     FastLED.setMaxPowerInVoltsAndMilliamps(3, 500);
     FastLED.show();
-    delay(1);
-  }
-  for (float z = 0; z <= 1; z += 0.0025)
-  {
-    for (int i = 0; i < NUM_LEDS; i++)
-    {
-      leds[i] = CRGB(5 * z, 200 * (z / 2), 160);
-    }
-    FastLED.setMaxPowerInVoltsAndMilliamps(3, 500);
-    FastLED.show();
-    delay(1);
+    delay(speed);
   }
 }
-
-void fadePink()
-{
-  for (float z = 1; z > 0.1; z -= 0.0045)
-  {
-    for (int i = 0; i < NUM_LEDS; i++)
-    {
-      leds[i] = CRGB(0, 100 * z, 200 * (z / 2));
-    }
-    FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
-    FastLED.show();
-    delay(2);
-  }
-  for (float z = 0.1; z <= 1; z += 0.0045)
-  {
-    for (int i = 0; i < NUM_LEDS; i++)
-    {
-      leds[i] = CRGB(0, 100 * z, 160 * (z / 2));
-    }
-    FastLED.setMaxPowerInVoltsAndMilliamps(5, 500);
-    FastLED.show();
-    delay(2);
-  }
-}
+// void fadePinkBlue()
+// {
+//   for (float z = 1; z > 0; z -= 0.0025)
+//   {
+//     for (int i = 0; i < NUM_LEDS; i++)
+//     {
+//       leds[i] = CRGB(5 * z, 200 * (z / 2), 160);
+//     }
+//     FastLED.setMaxPowerInVoltsAndMilliamps(3, 500);
+//     FastLED.show();
+//     delay(1);
+//   }
+//   for (float z = 0; z <= 1; z += 0.0025)
+//   {
+//     for (int i = 0; i < NUM_LEDS; i++)
+//     {
+//       leds[i] = CRGB(5 * z, 200 * (z / 2), 160);
+//     }
+//     FastLED.setMaxPowerInVoltsAndMilliamps(3, 500);
+//     FastLED.show();
+//     delay(1);
+//   }
+// }
