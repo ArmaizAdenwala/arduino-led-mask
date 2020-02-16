@@ -6,7 +6,7 @@
 #define NUM_FIRST_ROW 26
 #define LED_TYPE WS2812B
 #define COLOR_ORDER RGB
-#define BRIGHTNESS 160
+#define BRIGHTNESS 190
 
 CRGB leds[NUM_LEDS];
 
@@ -17,7 +17,7 @@ void setup()
   delay(1000);
   FastLED.addLeds<LED_TYPE, LED_PIN>(leds, NUM_LEDS);
   FastLED.setBrightness(BRIGHTNESS);
-  FastLED.setMaxPowerInVoltsAndMilliamps(3, 500);
+  FastLED.setMaxPowerInVoltsAndMilliamps(4.5, 500);
   FastLED.clear();
   FastLED.show();
 }
@@ -29,29 +29,36 @@ void loop()
   // fillColor(60, 10, 230);
   // fillColor(100, 20, 250);
   // fillColor(10, 200, 163);
-  // fillColor(10, 170, 223);
+  // fillColor(100, 30, 233);
+  // FastLED.show();
+  // FastLED.delay(500);
+  // fillColor(5, 5, 230);
   // FastLED.show();
   // FastLED.delay(500);
   // fillColor(80, 10, 180);
   // FastLED.show();
   // FastLED.delay(500);
   // fadePinkBlue();
-  fadeToColor(0, 0, 200, 0, 40, 80, 150, 1);
-  delay(10);
-  fadeToColor(0, 40, 80, 0, 0, 200, 150, 1);
-  delay(10);
-  fadeToColor(0, 0, 200, 0, 40, 80, 150, 1);
-  delay(10);
-  rainbowFade();
-  circle();
-  circle();
-  circle();
-  circle();
-  circleInverse();
-  circleInverse();
-  circleInverse();
-  circleInverse();
-  // FastLED.setMaxPowerInVoltsAndMilliamps(3, 500);
+  // fadeToColor(0, 0, 200, 0, 40, 80, 150, 1);
+  // delay(10);
+  // fadeToColor(0, 40, 80, 0, 0, 200, 150, 1);
+  // delay(10);
+  // fadeToColor(0, 0, 200, 0, 40, 80, 150, 1);
+  // delay(10);
+  // rainbowFade();
+  effect1();
+  // circle();
+  // circle();
+  // circleInverse();
+  // circleInverse();
+  // circleInverse();
+  // circle();
+  // circle();
+  // circle();
+  // circleInverse();
+  // circleInverse();
+  // circleInverse();
+  // FastLED.setMaxPowerInVoltsAndMilliamps(4.5, 500);
   // FastLED.delay(200);
 }
 
@@ -67,11 +74,11 @@ void circleInverse()
           3, 4, 0, 1, 2, 3, 4, 0, 1, 1, 1, 1, 0, 4, 3, 2, 1, 0, 4, 3
   };
   int rgbColors[5][3] = {
-      {5, 40, 190},
-      {5, 40, 190},
-      {5, 40, 190},
-      {80, 5, 190},
-      {80, 5, 190}
+      {5, 100, 150},
+      {5, 100, 150},
+      {5, 100, 150},
+      {120, 35, 190},
+      {120, 35, 190}
   };
 
   for (int x = 4; x >= 0; x--) {
@@ -85,7 +92,7 @@ void circleInverse()
         leds[i] = CRGB(r, g, b);
       }
       FastLED.show();
-      FastLED.setMaxPowerInVoltsAndMilliamps(5, 750);
+      FastLED.setMaxPowerInVoltsAndMilliamps(4.5, 750);
       FastLED.delay(1);
     }
   }
@@ -102,18 +109,11 @@ void circle()
          3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 2, 2, 1, 0, 4, 3, 2, 1, 0, 4, 3,
           3, 4, 0, 1, 2, 3, 4, 0, 1, 1, 1, 1, 0, 4, 3, 2, 1, 0, 4, 3
   };
-  // int rgbColors[5][3] = {
-  //     {160, 10, 103},
-  //     {5, 5, 230},
-  //     {5, 5, 230},
-  //     {5, 5, 230},
-  //     {5, 5, 230}
-  // }
 
   int rgbColors[5][3] = {
-      {120, 10, 143},
-      {100, 30, 233},
       {5, 5, 230},
+      {130, 170, 23},
+      {130, 170, 23},
       {5, 5, 230},
       {5, 5, 230},
   };
@@ -128,10 +128,81 @@ void circle()
         leds[i] = CRGB(r, g, b);
       }
       FastLED.show();
-      FastLED.setMaxPowerInVoltsAndMilliamps(5, 750);
+      FastLED.setMaxPowerInVoltsAndMilliamps(4.5, 750);
       FastLED.delay(1);
     }
   }
+}
+
+void effect1()
+{
+  int arr[NUM_LEDS] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+         0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+  };
+  int pattern[NUM_LEDS] = {};
+  int startIndex = 0;
+  for (int row = 0; row < NUM_ROWS; row++) {
+    if (row % 2 == 0) {
+      for (int index = 0; index < (NUM_FIRST_ROW - row); index ++) {
+        pattern[index + startIndex] = arr[index + startIndex];
+      }
+      startIndex += (NUM_FIRST_ROW - row);
+    }
+    else {
+      for (int index = 0; index < (NUM_FIRST_ROW - row); index ++) {
+        pattern[index + startIndex] = arr[startIndex + NUM_FIRST_ROW - row - index];
+      }
+      startIndex += (NUM_FIRST_ROW - row);
+    }
+  }
+
+  int rgbColors[5][3] = {
+      {5, 5, 230},
+      {130, 170, 23},
+      {130, 170, 23},
+      {5, 5, 230},
+      {5, 5, 230},
+  };
+  for (int i = 0; i < NUM_LEDS; i++) {
+    int color = pattern[i];
+    if (color == 0) {
+      leds[i] = CRGB(0, 0, 5);
+    } else {
+      leds[i] = CRGB(5, 0, 0);
+    }
+    FastLED.show();
+    FastLED.setMaxPowerInVoltsAndMilliamps(4.5, 750);
+    FastLED.delay(100);
+  }
+  FastLED.show();
+  FastLED.setMaxPowerInVoltsAndMilliamps(4.5, 750);
+  FastLED.delay(1);
+}
+
+int* flipArray(int arr[]) {
+  int newArr[NUM_LEDS] = {};
+  int startIndex = 0;
+  for (int row = 0; row < NUM_ROWS; row++) {
+    if (row % 2 == 0) {
+      for (int index = 0; index < (NUM_FIRST_ROW - row); index ++) {
+        newArr[index + startIndex] = arr[index + startIndex];
+      }
+      startIndex += (NUM_FIRST_ROW - row);
+    }
+    else {
+      for (int index = 0; index < (NUM_FIRST_ROW - row); index ++) {
+        newArr[index + startIndex] = arr[startIndex + NUM_FIRST_ROW - row - index];
+      }
+      startIndex += (NUM_FIRST_ROW - row);
+    }
+  }
+  return newArr;
 }
 
 float getColorFade(int a, int b, int index, int range, int i)
