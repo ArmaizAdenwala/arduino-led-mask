@@ -2,14 +2,13 @@
 
 #define LED_PIN A5
 #define NUM_LEDS 161
-#define NUM_ROWS 7
-#define NUM_FIRST_ROW 26
+// #define NUM_ROWS 7
+// #define NUM_FIRST_ROW 26
 #define LED_TYPE WS2812B
 #define BRIGHTNESS 200
 
 CRGB leds[NUM_LEDS];
 
-// Sets up FastLED library
 void setup()
 {
   Serial.begin(9600);
@@ -24,12 +23,12 @@ void setup()
 void loop()
 {
   // rainbowFade();
-  // lineFade();
-  // lineFade();
-  // lineFade();
-  horizontalLineFade();
-  horizontalLineFade();
-  horizontalLineFade();
+  lineFade();
+  lineFade();
+  lineFade();
+  // horizontalLineFade();
+  // horizontalLineFade();
+  // horizontalLineFade();
   circle();
   circle();
   circle();
@@ -50,10 +49,10 @@ void horizontalLineFade()
           6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
   };
   int rgbColors[7][3] = {
-      {5, 100, 150},
-      {5, 100, 150},
-      {120, 35, 190},
-      {120, 35, 190},
+      {5, 160, 60},
+      {5, 160, 60},
+      {60, 35, 150},
+      {60, 35, 150},
   };
 
   for (int x = 3; x >= 0; x--) {
@@ -192,48 +191,48 @@ float getColorFade(int a, int b, int index, int range, int i)
   return a + change;
 }
 
-void rainbowFade()
-{
-  fadeToColor(0, 0, 200, 100, 0, 100, 150, 1);
-  delay(10);
-  fadeToColor(100, 0, 100, 0, 0, 200, 150, 1);
-  delay(10);
-  fadeToColor(0, 0, 200, 0, 100, 10, 150, 1);
-  delay(10);
-  fadeToColor(0, 100, 10, 0, 0, 200, 150, 1);
-  delay(10);
-}
+// void rainbowFade()
+// {
+//   fadeToColor(0, 0, 200, 100, 0, 100, 150, 1);
+//   delay(10);
+//   fadeToColor(100, 0, 100, 0, 0, 200, 150, 1);
+//   delay(10);
+//   fadeToColor(0, 0, 200, 0, 100, 10, 150, 1);
+//   delay(10);
+//   fadeToColor(0, 100, 10, 0, 0, 200, 150, 1);
+//   delay(10);
+// }
 
-void fillColor(int r, int g, int b)
-{
-  for (int i = 0; i < NUM_LEDS; i++)
-  {
-    leds[i] = CRGB(g, r, b);
-  }
-}
+// void fillColor(int r, int g, int b)
+// {
+//   for (int i = 0; i < NUM_LEDS; i++)
+//   {
+//     leds[i] = CRGB(g, r, b);
+//   }
+// }
 
-void fadeToColor(float r1, float g1, float b1, float r2, float g2, float b2, float steps, int speed)
-{
-  float deltaR = (r2 - r1) / steps;
-  float deltaG = (g2 - g1) / steps;
-  float deltaB = (b2 - b1) / steps;
-  float curR = r1;
-  float curG = g1;
-  float curB = b1;
+// void fadeToColor(float r1, float g1, float b1, float r2, float g2, float b2, float steps, int speed)
+// {
+//   float deltaR = (r2 - r1) / steps;
+//   float deltaG = (g2 - g1) / steps;
+//   float deltaB = (b2 - b1) / steps;
+//   float curR = r1;
+//   float curG = g1;
+//   float curB = b1;
 
-  float curDeltaR = 0;
-  float curDeltaG = 0;
-  float curDeltaB = 0;
-  for (int i = 0; i < steps; i++)
-  {
-    curDeltaR += deltaR;
-    curDeltaG += deltaG;
-    curDeltaB += deltaB;
-    fillColor(
-        curR + curDeltaR,
-        curG + curDeltaG,
-        curB + curDeltaB);
-    FastLED.show();
-    delay(speed);
-  }
-}
+//   float curDeltaR = 0;
+//   float curDeltaG = 0;
+//   float curDeltaB = 0;
+//   for (int i = 0; i < steps; i++)
+//   {
+//     curDeltaR += deltaR;
+//     curDeltaG += deltaG;
+//     curDeltaB += deltaB;
+//     fillColor(
+//         curR + curDeltaR,
+//         curG + curDeltaG,
+//         curB + curDeltaB);
+//     FastLED.show();
+//     delay(speed);
+//   }
+// }
