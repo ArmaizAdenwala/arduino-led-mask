@@ -45,18 +45,30 @@ void loop()
           6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6
   };
 
-  uint_least8_t line2Pattern[NUM_LEDS] = {
-    1, 0, 0, 0, 0, 1, 2, 2, 2, 2, 3, 0, 0, 0, 0, 3, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1,
-     1, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 0, 0, 0, 3, 3, 2, 2, 2, 1, 1, 0, 0, 0, 1,
-      1, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 0, 0, 3, 3, 3, 2, 2, 1, 1, 1, 0, 0, 1,
-       1, 0, 1, 1, 1, 1, 2, 3, 3, 3, 3, 0, 3, 3, 3, 3, 2, 1, 1, 1, 1, 0, 1,
-        0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 0, 0, 3, 3, 3, 2, 2, 1, 1, 1, 0, 1,
-         0, 0, 1, 1, 2, 2, 2, 3, 3, 0, 0, 0, 3, 3, 2, 2, 2, 1, 1, 0, 1,
-          0, 0, 1, 2, 2, 2, 2, 3, 0, 0, 0, 0, 3, 2, 2, 2, 2, 1, 0, 1
+  // uint_least8_t line2Pattern[NUM_LEDS] = {
+  //   1, 0, 0, 0, 0, 1, 2, 2, 2, 2, 3, 0, 0, 0, 0, 3, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1,
+  //    1, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 0, 0, 0, 3, 3, 2, 2, 2, 1, 1, 0, 0, 0, 1,
+  //     1, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 0, 0, 3, 3, 3, 2, 2, 1, 1, 1, 0, 0, 1,
+  //      1, 0, 1, 1, 1, 1, 2, 3, 3, 3, 3, 0, 3, 3, 3, 3, 2, 1, 1, 1, 1, 0, 1,
+  //       0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 0, 0, 3, 3, 3, 2, 2, 1, 1, 1, 0, 1,
+  //        0, 0, 1, 1, 2, 2, 2, 3, 3, 0, 0, 0, 3, 3, 2, 2, 2, 1, 1, 0, 1,
+  //         0, 0, 1, 2, 2, 2, 2, 3, 0, 0, 0, 0, 3, 2, 2, 2, 2, 1, 0, 1
+  // };
+
+  uint_least8_t verticalLinePattern[NUM_LEDS] = {
+    0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 2, 1, 0, 4, 3, 2, 1, 0, 4, 3, 2, 1, 0,
+     0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 1, 0, 4, 3, 2, 1, 0, 4, 3, 2, 1, 0,
+      0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 1, 0, 4, 3, 2, 1, 0, 4, 3, 2, 1, 0,
+       0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 0, 4, 3, 2, 1, 0, 4, 3, 2, 1, 0,
+        0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 0, 4, 3, 2, 1, 0, 4, 3, 2, 1, 0,
+         0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 4, 3, 2, 1, 0, 4, 3, 2, 1, 0,
+          0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 4, 3, 2, 1, 0, 4, 3, 2, 1, 0
   };
 
   uint_least8_t lineColors[5] = { 4, 4, 5, 5, 5 };
-  uint_least8_t line2Colors[6] = { 6, 6, 7, 7, 8, 8 };
+  uint_least8_t line2Colors[6] = { 6, 6, 5, 5, 8, 8 };
+  uint_least8_t verticalColors[5] = { 9, 9, 10, 10, 10 };
+  uint_least8_t tempColors[20] = { 5, 5, 5, 5, 5, 4, 4, 4, 4, 4, 7, 7, 7, 7, 7, 2, 2, 2, 2, 2 };
   uint_least8_t circleColors[5]= { 0, 0, 0, 1, 1};
   uint_least8_t circleColors2[5] = { 2, 2, 2, 3, 3 };
   pattern(circlePattern, circleColors, false, 1, 5);
@@ -71,22 +83,30 @@ void loop()
   pattern(linePattern, lineColors, false, 1, 5);
   pattern(linePattern, lineColors, false, 1, 5);
 
-  pattern(line2Pattern, line2Colors, false, 3, 6);
-  pattern(line2Pattern, line2Colors, false, 3, 6);
-  pattern(line2Pattern, line2Colors, false, 3, 6);
+  // pattern(line2Pattern, line2Colors, false, 3, 6);
+  // pattern(line2Pattern, line2Colors, false, 3, 6);
+  // pattern(line2Pattern, line2Colors, false, 3, 6);
+
+  pattern(verticalLinePattern, verticalColors, false, 1.5, 5);
+  pattern(verticalLinePattern, verticalColors, false, 1.5, 5);
+  pattern(verticalLinePattern, verticalColors, false, 1.5, 5);
+
+  pattern(linePattern, tempColors, false, 1.5, 20);
 }
 
-void pattern(uint_least8_t pattern[NUM_LEDS], uint_least8_t rgbColors[5], bool reverse, uint_least8_t speed, uint_least8_t max) {
-  uint_least8_t colors[9][3] = {
-    {5, 5, 230},
+void pattern(uint_least8_t pattern[NUM_LEDS], uint_least8_t rgbColors[5], bool reverse, float speed, uint_least8_t max) {
+  uint_least8_t colors[11][3] = {
+    {95, 0, 10},
     {130, 170, 23},
     {5, 100, 150},
     {120, 35, 190},
     {5, 160, 60},
     {60, 35, 150},
     {5, 100, 150},
-    {120, 35, 190},
+    {0, 30, 170},
     {140, 165, 10},
+    {130, 130, 130},
+    {10, 100, 00}
   };
   for (uint_least8_t x = 0; x < max; x++) {
     for (uint_least8_t z = 0; z < (4 * speed); z++) {
