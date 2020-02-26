@@ -44,47 +44,66 @@ void loop()
          5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
           6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6
   };
+
+  uint_least8_t line2Pattern[NUM_LEDS] = {
+    1, 0, 0, 0, 0, 1, 2, 2, 2, 2, 3, 0, 0, 0, 0, 3, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1,
+     1, 0, 0, 0, 1, 1, 2, 2, 2, 3, 3, 0, 0, 0, 3, 3, 2, 2, 2, 1, 1, 0, 0, 0, 1,
+      1, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 0, 0, 3, 3, 3, 2, 2, 1, 1, 1, 0, 0, 1,
+       1, 0, 1, 1, 1, 1, 2, 3, 3, 3, 3, 0, 3, 3, 3, 3, 2, 1, 1, 1, 1, 0, 1,
+        0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 0, 0, 3, 3, 3, 2, 2, 1, 1, 1, 0, 1,
+         0, 0, 1, 1, 2, 2, 2, 3, 3, 0, 0, 0, 3, 3, 2, 2, 2, 1, 1, 0, 1,
+          0, 0, 1, 2, 2, 2, 2, 3, 0, 0, 0, 0, 3, 2, 2, 2, 2, 1, 0, 1
+  };
+
   uint_least8_t lineColors[5] = { 4, 4, 5, 5, 5 };
+  uint_least8_t line2Colors[6] = { 6, 6, 7, 7, 8, 8 };
   uint_least8_t circleColors[5]= { 0, 0, 0, 1, 1};
   uint_least8_t circleColors2[5] = { 2, 2, 2, 3, 3 };
-  pattern(circlePattern, circleColors, false);
-  pattern(circlePattern, circleColors, false);
-  pattern(circlePattern, circleColors, false);
+  pattern(circlePattern, circleColors, false, 1, 5);
+  pattern(circlePattern, circleColors, false, 1, 5);
+  pattern(circlePattern, circleColors, false, 1, 5);
 
-  // pattern(circlePattern, circleColors2, true);
-  // pattern(circlePattern, circleColors2, true);
-  // pattern(circlePattern, circleColors2, true);
+  pattern(circlePattern, circleColors2, true, 1, 5);
+  pattern(circlePattern, circleColors2, true, 1, 5);
+  pattern(circlePattern, circleColors2, true, 1, 5);
 
-  pattern(linePattern, lineColors, false);
-  pattern(linePattern, lineColors, false);
-  pattern(linePattern, lineColors, false);
+  pattern(linePattern, lineColors, false, 1, 5);
+  pattern(linePattern, lineColors, false, 1, 5);
+  pattern(linePattern, lineColors, false, 1, 5);
+
+  pattern(line2Pattern, line2Colors, false, 3, 6);
+  pattern(line2Pattern, line2Colors, false, 3, 6);
+  pattern(line2Pattern, line2Colors, false, 3, 6);
 }
 
-void pattern(uint_least8_t pattern[NUM_LEDS], uint_least8_t rgbColors[5], bool reverse) {
-  uint_least8_t colors[6][3] = {
+void pattern(uint_least8_t pattern[NUM_LEDS], uint_least8_t rgbColors[5], bool reverse, uint_least8_t speed, uint_least8_t max) {
+  uint_least8_t colors[9][3] = {
     {5, 5, 230},
     {130, 170, 23},
     {5, 100, 150},
     {120, 35, 190},
     {5, 160, 60},
     {60, 35, 150},
+    {5, 100, 150},
+    {120, 35, 190},
+    {140, 165, 10},
   };
-  for (uint_least8_t x = 0; x < 5; x++) {
-    for (uint_least8_t z = 0; z < 4; z++) {
+  for (uint_least8_t x = 0; x < max; x++) {
+    for (uint_least8_t z = 0; z < (4 * speed); z++) {
       for (uint_least8_t i = 0; i < NUM_LEDS; i++) {
         uint_least8_t colorA;
         uint_least8_t colorB;
         if (reverse) {
-          colorB = (pattern[i] + (4 - x)) % 5;
-          colorA = (colorB + 1) % 5;
+          colorB = (pattern[i] + (4 - x)) % max;
+          colorA = (colorB + 1) % max;
         } else {
-          colorA = (pattern[i] + x) % 5;
-          colorB = (colorA + 1) % 5;
+          colorA = (pattern[i] + x) % max;
+          colorB = (colorA + 1) % max;
         }
         leds[i] = CRGB(
-          getColorFade(colors[rgbColors[colorA]][0], colors[rgbColors[colorB]][0], z, 4, i),
-          getColorFade(colors[rgbColors[colorA]][1], colors[rgbColors[colorB]][1], z, 4, i),
-          getColorFade(colors[rgbColors[colorA]][2], colors[rgbColors[colorB]][2], z, 4, i)
+          getColorFade(colors[rgbColors[colorA]][0], colors[rgbColors[colorB]][0], z, (4 * speed), i),
+          getColorFade(colors[rgbColors[colorA]][1], colors[rgbColors[colorB]][1], z, (4 * speed), i),
+          getColorFade(colors[rgbColors[colorA]][2], colors[rgbColors[colorB]][2], z, (4 * speed), i)
         );
       }
       FastLED.show();
