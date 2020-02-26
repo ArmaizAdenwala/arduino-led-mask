@@ -35,24 +35,24 @@ void loop()
           3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 2, 2, 1, 0, 4, 3, 2, 1, 0, 4, 3,
           3, 4, 0, 1, 2, 3, 4, 0, 1, 1, 1, 1, 0, 4, 3, 2, 1, 0, 4, 3
   };
-  int circleColors[5][3] = {
-    {5, 5, 230},
-    {130, 170, 23},
-    {130, 170, 23},
-    {5, 5, 230},
-    {5, 5, 230},
+  int circleColors[5]= {
+    0,
+    0,
+    0,
+    1,
+    1,
+  };
+  int circleColors2[5] = {
+      2,
+      2,
+      2,
+      3,
+      3
   };
   pattern(circlePattern, circleColors, false);
   pattern(circlePattern, circleColors, false);
   pattern(circlePattern, circleColors, false);
 
-  int circleColors2[5][3] = {
-      {5, 100, 150},
-      {5, 100, 150},
-      {5, 100, 150},
-      {120, 35, 190},
-      {120, 35, 190}
-  };
   pattern(circlePattern, circleColors2, true);
   pattern(circlePattern, circleColors2, true);
   pattern(circlePattern, circleColors2, true);
@@ -167,7 +167,13 @@ void loop()
 //   }
 // }
 
-void pattern(int pattern[NUM_LEDS], int rgbColors[5][3], bool reverse) {
+void pattern(int pattern[NUM_LEDS], int rgbColors[5], bool reverse) {
+  int colors[4][3] = {
+    {5, 5, 230},
+    {130, 170, 23},
+    {5, 100, 150},
+    {120, 35, 190}
+  };
   for (int x = 0; x < 5; x++) {
     for (int z = 0; z < 4; z++) {
       for (int i = 0; i < NUM_LEDS; i++) {
@@ -180,9 +186,9 @@ void pattern(int pattern[NUM_LEDS], int rgbColors[5][3], bool reverse) {
           colorA = (pattern[i] + x) % 5;
           colorB = (colorA + 1) % 5;
         }
-        float r = getColorFade(rgbColors[colorA][0], rgbColors[colorB][0], z, 4, i);
-        float g = getColorFade(rgbColors[colorA][1], rgbColors[colorB][1], z, 4, i);
-        float b = getColorFade(rgbColors[colorA][2], rgbColors[colorB][2], z, 4, i);
+        float r = getColorFade(colors[rgbColors[colorA]][0], colors[rgbColors[colorB]][0], z, 4, i);
+        float g = getColorFade(colors[rgbColors[colorA]][1], colors[rgbColors[colorB]][1], z, 4, i);
+        float b = getColorFade(colors[rgbColors[colorA]][2], colors[rgbColors[colorB]][2], z, 4, i);
         leds[i] = CRGB(r, g, b);
       }
       FastLED.show();
