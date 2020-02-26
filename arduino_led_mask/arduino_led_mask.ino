@@ -2,8 +2,8 @@
 
 #define LED_PIN A5
 #define NUM_LEDS 161
-// #define NUM_ROWS 7
-// #define NUM_FIRST_ROW 26
+#define NUM_ROWS 7
+#define NUM_FIRST_ROW 26
 #define LED_TYPE WS2812B
 #define BRIGHTNESS 200
 
